@@ -13,7 +13,7 @@ This is a template repository. Clone it, rename it to fit your project, and cust
 
 - databricks.yml: main bundle configuration and target settings
 - resources/sample_job.yml: sample Databricks job definition
-- src/task_1.py and src/task_2.py: example Python tasks
+- src/task_1.py and src/task_2.py: example notebook tasks
 - pyproject.toml: Python project metadata and development dependencies
 - tests/: placeholder test location
 
@@ -21,34 +21,18 @@ This is a template repository. Clone it, rename it to fit your project, and cust
 
 Before deploying or running this template, make sure the following configuration is updated:
 
-1. Rename and config
-   - Update the project name in pyproject.toml.
-   - update the environments and 
+1. Update the config
+   - update the environment variables and databricks host(url) in the databricks.yml file
+   - update the default catalog and schema values
 
-2. Configure your Databricks workspace
-   - Update the workspace host in databricks.yml for your environment.
-   - Set the catalog and schema values under the dev target.
+2. Authenticate to Databricks
+   - This repo, currently authenticates through databricks host and token configured
+   - Update the DATABRICKS_HOST (format: https://adb-1234567890123456.00.azuredatabricks.net)
+   - Update the DATABRICKS_TOKEN (personal token)
+   - It is strongly recommended to use service priniciple in real-time projects
 
-3. Provide a valid cluster
-   - Replace the example cluster ID in resources/sample_job.yml with an existing Databricks cluster ID in your workspace.
+3. Jobs and notebooks update
+   - update the jobs and notebooks as per requirements
 
-4. Authenticate to Databricks
-   - Install the Databricks CLI.
-   - Authenticate using your Databricks workspace credentials, for example with:
-     - databricks auth login
-
-5. Install local dependencies
-   - Create and activate a Python environment.
-   - Install the project and dev dependencies, for example:
-     - pip install -e .
-     - pip install pytest ruff databricks-dlt "databricks-connect>=15.4,<15.5" ipykernel
-
-## Quick start
-
-After the configuration above is complete, you can validate and deploy the bundle:
-
-- databricks bundle validate
-- databricks bundle deploy
-
-You can then customize the sample job, replace the example tasks, and add your own logic.
-
+4. Databricks bundle validate
+   - Authenticate from local and do databricks bundle valid
