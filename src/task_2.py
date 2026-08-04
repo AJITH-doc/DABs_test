@@ -1,3 +1,4 @@
+# Databricks notebook source
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
 from pyspark.sql.functions import col
 
