@@ -25,9 +25,9 @@ jobs:
         uses: databricks/setup-cli@main
 
       - name: Validate bundle
-        working-directory: ./databricks_dab_template
+        working-directory: .
         run: databricks bundle validate -t ${{ github.event.inputs.target || github.base_ref }}
         
       - name: Deploy bundle
-        working-directory: ./databricks_dab_template
+        working-directory: .
         run: databricks bundle deploy -t ${{ github.event.inputs.target || github.base_ref }}
