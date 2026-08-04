@@ -1,0 +1,20 @@
+resources:
+  jobs:
+    my_job:
+      name: sample_job2
+
+      tasks:
+        - task_key: task_1
+          existing_cluster_id: ${var.cluster_id}
+          notebook_task:
+            notebook_path: ../src/task_1.py
+
+      schedule:
+        quartz_cron_expression: "0 0 * * * ?"   # every 1 hour, at minute 0
+        timezone_id: "UTC"
+        pause_status: PAUSED
+
+variables:
+  cluster_id:
+    description: "Existing interactive cluster ID used by all tasks in this job"
+    default: "0319-063857-51hoh3mq" 
