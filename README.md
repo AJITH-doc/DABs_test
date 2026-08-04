@@ -9,16 +9,6 @@ This repository is a simple starter template for Databricks Asset Bundles (DAB).
 
 This is a template repository. Clone it, rename it to fit your project, and customize the sample job and code for your own use case.
 
-## What this repo does
-
-The repo provides a minimal Databricks workflow example:
-
-1. A bundle is defined so you can deploy and manage Databricks resources from source.
-2. A sample job is configured to run two Python tasks sequentially.
-3. The example tasks create small Spark DataFrames to demonstrate job execution in Databricks.
-
-It is meant to be a starting point rather than a finished production workflow.
-
 ## Repository structure
 
 - databricks.yml: main bundle configuration and target settings
@@ -31,9 +21,9 @@ It is meant to be a starting point rather than a finished production workflow.
 
 Before deploying or running this template, make sure the following configuration is updated:
 
-1. Rename the project
+1. Rename and config
    - Update the project name in pyproject.toml.
-   - Rename the bundle name in databricks.yml if needed.
+   - update the environments and 
 
 2. Configure your Databricks workspace
    - Update the workspace host in databricks.yml for your environment.
