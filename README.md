@@ -11,11 +11,33 @@ This is a template repository. Clone it, rename it to fit your project, and cust
 
 ## Repository structure
 
-- databricks.yml: main bundle configuration and target settings
-- resources/sample_job.yml: sample Databricks job definition
-- src/task_1.py and src/task_2.py: example notebook tasks
-- pyproject.toml: Python project metadata and development dependencies
-- tests/: placeholder test location
+The project is organized into a few simple folders so configuration, code, and deployment assets stay separated.
+
+```text
+databricks_dab_template/
+├── .github/
+│   └── workflows/
+├── resources/
+│   └── sample_job.yml
+├── src/
+│   ├── task_1.py
+│   └── task_2.py
+├── tests/
+│   └── sample_test.py
+├── databricks.yml
+├── README.md
+└── .gitignore
+```
+
+### What each part is for
+
+- .github/workflows/: contains CI/CD workflow files for automation such as deployment pipelines
+- resources/: holds Databricks resource definitions, including the sample job configuration
+- src/: contains the Python source files that define your job tasks or logic
+- tests/: stores test files for validating your code locally
+- databricks.yml: the main Databricks Asset Bundle configuration file
+- README.md: project documentation and usage instructions
+- .gitignore: lists files and folders that should not be committed to Git
 
 ## Before you use it
 
