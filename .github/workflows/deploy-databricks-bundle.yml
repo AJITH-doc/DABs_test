@@ -1,15 +1,15 @@
 name: Deploy Databricks Asset Bundle
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-    inputs:
-      target:
-        description: "Bundle target to deploy (e.g. dev, staging, prod)"
-        required: true
-        default: "dev"
+# on:
+#   push:
+#     branches:
+#       - main
+#   workflow_dispatch:
+#     inputs:
+#       target:
+#         description: "Bundle target to deploy (e.g. dev, staging, prod)"
+#         required: true
+#         default: "dev"
 
 jobs:
   deploy:
