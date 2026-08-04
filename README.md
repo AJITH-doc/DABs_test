@@ -49,8 +49,9 @@ Before deploying or running this template, make sure the following configuration
 
 2. Authenticate to Databricks
    - This repo, currently authenticates through databricks host and token configured
-   - Update the DATABRICKS_HOST (format: https://adb-1234567890123456.00.azuredatabricks.net)
-   - Update the DATABRICKS_TOKEN (personal token)
+   - Update the below secrets in github which will be used in github workflow deployments
+   - DATABRICKS_HOST (format: https://adb-1234567890123456.00.azuredatabricks.net)
+   - DATABRICKS_TOKEN (personal token)
    - It is strongly recommended to use service priniciple in real-time projects
 
 3. Jobs and notebooks update
