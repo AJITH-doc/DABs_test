@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       target:
-        description: "Bundle target to deploy (e.g. dev, staging, prod)"
+        description: "Bundle target to deploy"
         required: true
         default: "dev"
 jobs:
