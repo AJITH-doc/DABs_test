@@ -3,19 +3,6 @@ resources:
     sample_job:
       name: sample_job
 
-      job_clusters:
-        - job_cluster_key: default_cluster
-          new_cluster:
-            spark_version: 17.3.x-scala2.13
-            node_type_id: Standard_D2ads_v6
-            num_workers: 0
-            data_security_mode: USER_ISOLATION
-            custom_tags:
-              ResourceClass: SingleNode
-            spark_conf:
-              spark.databricks.cluster.profile: singleNode
-              spark.master: local[*, 4]
-
       tasks:
         - task_key: dlt_pipeline
           pipeline_task:
@@ -24,7 +11,7 @@ resources:
         - task_key: agg_task
           depends_on:
             - task_key: dlt_pipeline
-          job_cluster_key: default_cluster
+          existing_cluster_id: 0319-063857-51hoh3mq
           notebook_task:
             notebook_path: ../src/agg_task.py
 

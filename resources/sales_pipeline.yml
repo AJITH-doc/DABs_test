@@ -4,16 +4,7 @@ resources:
       name: sales_pipeline
       catalog: ${var.catalog}
       schema: ${var.schema}
-      clusters:
-        - label: default
-          node_type_id: Standard_D2ads_v6
-          driver_node_type_id: Standard_D2ads_v6
-          num_workers: 0
-          custom_tags:
-            ResourceClass: SingleNode
-          spark_conf:
-            spark.databricks.cluster.profile: singleNode
-            spark.master: local[*, 4]
+      serverless: true
       libraries:
         - notebook:
             path: ../src/sales_pipeline.py
