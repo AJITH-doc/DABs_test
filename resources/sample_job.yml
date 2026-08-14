@@ -4,24 +4,18 @@ resources:
       name: sample_job
 
       tasks:
-        - task_key: task_1
-          existing_cluster_id: ${var.cluster_id}
-          notebook_task:
-            notebook_path: ../src/task_1.py
+        - task_key: dlt_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.sales_pipeline.id}
 
-        - task_key: task_2
+        - task_key: agg_task
           depends_on:
-            - task_key: task_1
-          existing_cluster_id: ${var.cluster_id}
+            - task_key: dlt_pipeline
+          existing_cluster_id: 0319-063857-51hoh3mq
           notebook_task:
-            notebook_path: ../src/task_2.py
+            notebook_path: ../src/agg_task.py
 
       schedule:
         quartz_cron_expression: "0 0 * * * ?"   # every 1 hour, at minute 0
         timezone_id: "UTC"
-        pause_status: PAUSED
-
-variables:
-  cluster_id:
-    description: "Existing interactive cluster ID used by all tasks in this job"
-    default: "0319-063857-51hoh3mq" 
+        pause_status: PAUSED 

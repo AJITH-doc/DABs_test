@@ -22,8 +22,8 @@ targets:
     workspace:
       host: https://adb-7405615385053650.10.azuredatabricks.net
     variables:
-      catalog: rgaplxdatabricks
-      schema: dev
+      catalog: ingestion_cat
+      schema: test
 
   # prod:
   #   mode: production
