@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.target || github.base_ref }}
     env:
-      # DATABRICKS_HOST format: https://adb-<workspace-id>.<random-number>.azuredatabricks.net (no trailing slash)
+      # DATABRICKS_HOST format: https://adb-<workspace-id>.<random-number>.azuredatabricks.net(no trailing slash)
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
     steps:
