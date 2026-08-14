@@ -3,9 +3,10 @@
 This repository is a simple starter template for Databricks Asset Bundles (DAB). In short, it shows how to structure a Databricks project with:
 
 - a bundle definition in databricks.yml
-- a sample job definition in resources/sample_job.yml
-- example Python tasks under src/ that can be run as part of a job
-- a basic Python project setup for local development and testing
+- a Delta Live Tables pipeline definition in resources/sales_pipeline.yml
+- a job definition in resources/sample_job.yml that runs the pipeline followed by an aggregation task
+- example Python/notebook tasks under src/ that can be run as part of a job or pipeline
+- a GitHub Actions workflow that validates and deploys the bundle
 
 This is a template repository. Clone it, rename it to fit your project, and customize the sample job and code for your own use case.
 
@@ -17,13 +18,13 @@ The project is organized into a few simple folders so configuration, code, and d
 databricks_dab_template/
 ├── .github/
 │   └── workflows/
+│       └── deploy.yml
 ├── resources/
+│   ├── sales_pipeline.yml
 │   └── sample_job.yml
 ├── src/
-│   ├── task_1.py
-│   └── task_2.py
-├── tests/
-│   └── sample_test.py
+│   ├── sales_pipeline.py
+│   └── agg_task.py
 ├── databricks.yml
 ├── README.md
 └── .gitignore
@@ -31,11 +32,12 @@ databricks_dab_template/
 
 ### What each part is for
 
-- .github/workflows/: contains CI/CD workflow files for automation such as deployment pipelines
-- resources/: holds Databricks resource definitions, including the sample job configuration
-- src/: contains the Python source files that define your job tasks or logic
-- tests/: stores test files for validating your code locally
-- databricks.yml: the main Databricks Asset Bundle configuration file
+- .github/workflows/deploy.yml: CI/CD workflow that validates and deploys the bundle on pull requests to dev/main or via manual dispatch
+- resources/sales_pipeline.yml: defines the `sales_pipeline` Delta Live Tables pipeline (serverless), backed by src/sales_pipeline.py
+- resources/sample_job.yml: defines `sample_job`, which runs the DLT pipeline (`dlt_pipeline` task) followed by the aggregation task (`agg_task`), on an hourly (paused) schedule
+- src/sales_pipeline.py: DLT notebook that builds the silver-layer sales tables (filters payments, enriches with customer data)
+- src/agg_task.py: notebook that aggregates the enriched silver table into a gold summary table
+- databricks.yml: the main Databricks Asset Bundle configuration file, including the `catalog`/`schema` variables and the `dev` target (a commented-out `prod` target is included as an example)
 - README.md: project documentation and usage instructions
 - .gitignore: lists files and folders that should not be committed to Git
 
@@ -56,6 +58,9 @@ Before deploying or running this template, make sure the following configuration
 
 3. Jobs and notebooks update
    - update the jobs and notebooks as per requirements
+   - `agg_task` in resources/sample_job.yml currently runs on a hardcoded `existing_cluster_id` — replace this with your own cluster id or switch to a job cluster/serverless
+   - src/sales_pipeline.py and src/agg_task.py currently reference the `ingestion_cat.test` catalog/schema directly — update these to match your environment (or parameterize them using the `catalog`/`schema` bundle variables)
+   - the job schedule in resources/sample_job.yml is set to hourly and `pause_status: PAUSED` — update as needed before relying on it
 
 4. Databricks bundle validate
    - Authenticate from local and do databricks bundle valid
