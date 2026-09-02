@@ -25,14 +25,11 @@ targets:
       catalog: ingestion_cat
       schema: test
 
-  # prod:
-  #   mode: production
-  #   workspace:
-  #     host: https://adb-7405615385053650.10.azuredatabricks.net
-  #     root_path: /Workspace/Users/arulraj.gopal@applexus.com/.bundle/${bundle.name}/${bundle.target}
-  #   variables:
-  #     catalog: rgaplxdatabricks
-  #     schema: prod
-  #   permissions:
-  #     - user_name: arulraj.gopal@applexus.com
-  #       level: CAN_MANAGE
+  prod:
+    mode: production
+    workspace:
+      host: https://adb-8848629306534274.14.azuredatabricks.net
+    variables:
+      catalog: ingestion_cat
+      schema: test
+
