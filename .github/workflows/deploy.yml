@@ -1,21 +1,16 @@
 name: Deploy Databricks Asset Bundle
 on:
-  pull_request:
-    branches:
-      - dev
-      - main
-  workflow_dispatch:
-    inputs:
-      target:
-        description: "Bundle target to deploy"
-        required: true
-        default: "dev"
+  pull_request_review:
+    types: [submitted]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ github.event.inputs.target || github.base_ref }}
+    environment: ${{ github.event.pull_request.base.ref }}
     env:
       # DATABRICKS_HOST format: https://adb-<workspace-id>.<random-number>.azuredatabricks.net(no trailing slash)
+      # These resolve from the GitHub Environment selected above (each environment
+      # must define its own DATABRICKS_HOST / DATABRICKS_TOKEN secret values).
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
     steps:
@@ -27,8 +22,8 @@ jobs:
 
       - name: Validate bundle
         working-directory: .
-        run: databricks bundle validate -t ${{ github.event.inputs.target || github.base_ref }}
-        
+        run: databricks bundle validate -t ${{ github.event.pull_request.base.ref }}
+
       - name: Deploy bundle
         working-directory: .
-        run: databricks bundle deploy -t ${{ github.event.inputs.target || github.base_ref }}
+        run: databricks bundle deploy -t ${{ github.event.pull_request.base.ref }}
