@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ github.event.pull_request.base.ref }}
     env:
-      # DATABRICKS_HOST format: https://adb-<workspace-id>.<random-number>.azuredatabricks.net(no trailing slash)
-      # These resolve from the GitHub Environment selected above (each environment
-      # must define its own DATABRICKS_HOST / DATABRICKS_TOKEN secret values).
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
       DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
     steps:
