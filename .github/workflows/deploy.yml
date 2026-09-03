@@ -1,16 +1,17 @@
 name: Deploy Databricks Asset Bundle
 on:
-  pull_request_review:
-    types: [submitted]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   deploy:
-    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     environment: ${{ github.event.pull_request.base.ref }}
     env:
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+      DATABRICKS_AUTH_TYPE: oauth-m2m
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
