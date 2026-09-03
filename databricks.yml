@@ -36,6 +36,5 @@ targets:
     workspace:
       host: https://adb-8848629306534274.14.azuredatabricks.net
     variables:
-      catalog: aplxs_mdp_poc_dev
+      catalog: ingestion_cat
       schema: prod
-
