@@ -2,6 +2,9 @@
 import dlt
 from pyspark.sql.functions import col
 
+catalog = spark.conf.get("bundle.catalog")
+schema = spark.conf.get("bundle.schema")
+
 
 @dlt.table(
     name="silver_sales_transactions",
@@ -9,7 +12,7 @@ from pyspark.sql.functions import col
 )
 def silver_sales_transactions():
     return (
-        spark.read.table("ingestion_cat.test.bronze_sales_transactions")
+        spark.read.table(f"{catalog}.{schema}.bronze_sales_transactions")
         .where(col("paymentMethod") != "visa")
     )
 
@@ -20,5 +23,5 @@ def silver_sales_transactions():
 )
 def silver_sales_transactions_enriched():
     trs = dlt.read("silver_sales_transactions")
-    cus = spark.read.table("ingestion_cat.test.bronze_sales_customers")
+    cus = spark.read.table(f"{catalog}.{schema}.bronze_sales_customers")
     return trs.join(cus, "customerID")
