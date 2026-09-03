@@ -20,6 +20,8 @@ variables:
     description: The catalog to use
   schema:
     description: The schema to use
+  cluster_id:
+    description: The existing cluster id to run jobs on
 
 targets:
   dev:
@@ -30,6 +32,7 @@ targets:
     variables:
       catalog: aplxs_mdp_poc_dev
       schema: dev
+      cluster_id: 0820-044445-prhriy76
 
   prod:
     mode: production
@@ -38,3 +41,4 @@ targets:
     variables:
       catalog: ingestion_cat
       schema: prod
+      cluster_id: 0812-154339-6p36oaea
