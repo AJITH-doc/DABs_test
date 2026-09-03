@@ -1,10 +1,11 @@
 name: Deploy Databricks Asset Bundle
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  pull_request_review:
+    types: [submitted]
 
 jobs:
   deploy:
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     environment: ${{ github.event.pull_request.base.ref }}
     env:

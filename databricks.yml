@@ -28,7 +28,7 @@ targets:
     workspace:
       host: https://adb-7405615385053650.10.azuredatabricks.net
     variables:
-      catalog: applexus_internal
+      catalog: aplxs_mdp_poc_dev
       schema: dev
 
   prod:
@@ -36,6 +36,6 @@ targets:
     workspace:
       host: https://adb-8848629306534274.14.azuredatabricks.net
     variables:
-      catalog: applexus_internal
+      catalog: aplxs_mdp_poc_dev
       schema: prod
 
