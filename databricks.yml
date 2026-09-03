@@ -4,6 +4,12 @@ bundle:
   name: databricks_dab_template
   uuid: 61c9202c-5a4d-4dd0-a6c0-d46f0b304242
 
+# Grants access to every job/pipeline in this bundle to all workspace users,
+# so resources deployed by the service principal are still visible/manageable.
+permissions:
+  - level: CAN_RUN
+    group_name: users
+
 include:
   - resources/*.yml
 
@@ -14,6 +20,8 @@ variables:
     description: The catalog to use
   schema:
     description: The schema to use
+  cluster_id:
+    description: The existing cluster id to run jobs on
 
 targets:
   dev:
@@ -22,8 +30,9 @@ targets:
     workspace:
       host: https://adb-7405615385053650.10.azuredatabricks.net
     variables:
-      catalog: ingestion_cat
-      schema: test
+      catalog: aplxs_mdp_poc_dev
+      schema: dev
+      cluster_id: 0820-044445-prhriy76
 
   prod:
     mode: production
@@ -31,5 +40,5 @@ targets:
       host: https://adb-8848629306534274.14.azuredatabricks.net
     variables:
       catalog: ingestion_cat
-      schema: test
-
+      schema: prod
+      cluster_id: 0812-154339-6p36oaea

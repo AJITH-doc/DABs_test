@@ -11,9 +11,12 @@ resources:
         - task_key: agg_task
           depends_on:
             - task_key: dlt_pipeline
-          existing_cluster_id: 0820-044445-prhriy76
+          existing_cluster_id: ${var.cluster_id}
           notebook_task:
             notebook_path: ../src/agg_task.py
+            base_parameters:
+              catalog: ${var.catalog}
+              schema: ${var.schema}
 
       schedule:
         quartz_cron_expression: "0 0 * * * ?"   # every 1 hour, at minute 0
