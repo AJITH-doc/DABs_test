@@ -15,3 +15,7 @@ gold_agg_df = (
 gold_agg_df.write.mode("overwrite").saveAsTable(f"{catalog}.{schema}.gold_sales_transaction_summary")
 
 display(gold_agg_df)
+
+# COMMAND ----------
+
+print("test")
