@@ -35,4 +35,4 @@ jobs:
 
       - name: Deploy bundle
         working-directory: .
-        run: databricks bundle deploy -t ${{ inputs.branch }}
+        run: databricks bundle deploy -t ${{ inputs.branch }} --auto-approve
