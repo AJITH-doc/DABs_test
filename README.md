@@ -63,4 +63,4 @@ Before deploying or running this template, make sure the following configuration
    - the job schedule in resources/sample_job.yml is set to hourly and `pause_status: PAUSED` — update as needed before relying on it
 
 4. Databricks bundle validate
-   - Authenticate from local and do databricks bundle valid
+   - Authenticate from local and do databricks bundle valid.
