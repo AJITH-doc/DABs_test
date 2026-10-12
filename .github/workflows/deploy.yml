@@ -1,0 +1,29 @@
+name: Deploy Databricks Asset Bundle
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  deploy:
+    if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.pull_request.base.ref }}
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+      DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+      DATABRICKS_AUTH_TYPE: oauth-m2m
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Validate bundle
+        working-directory: .
+        run: databricks bundle validate -t ${{ github.event.pull_request.base.ref }}
+
+      - name: Deploy bundle
+        working-directory: .
+        run: databricks bundle deploy -t ${{ github.event.pull_request.base.ref }}

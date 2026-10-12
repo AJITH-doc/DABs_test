@@ -1,0 +1,13 @@
+resources:
+  pipelines:
+    sales_pipeline:
+      name: sales_pipeline
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      configuration:
+        bundle.catalog: ${var.catalog}
+        bundle.schema: ${var.schema}
+      libraries:
+        - notebook:
+            path: ../src/sales_pipeline.py
